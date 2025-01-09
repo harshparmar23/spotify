@@ -12,12 +12,16 @@ import songRoutes from "./routes/song.route.js"
 import albumRoutes from "./routes/album.route.js"
 import statRoutes from "./routes/stat.route.js"
 import path from "path"
+import cors from "cors"
+import { authCallback } from "./controller/auth.controller.js";
 
 dotenv.config();
 
 const __dirname = path.resolve();
 const app = express();
 const PORT = process.env.PORT;
+
+
 
 app.use(express.json());//to prase req.body
 app.use(clerkMiddleware());//help request(req) from clerk 
@@ -29,9 +33,10 @@ app.use(fileUpload({
         fileSize: 10 * 1024 * 1024//10mb
     }
 }));
+app.use(cors())
 
 app.use("/api/users", userRoutes);
-app.use("/api/auth", authRoutes);
+app.post("/api/auth/callback", authCallback);
 app.use("/api/admin", adminRoutes);
 app.use("/api/songs", songRoutes);
 app.use("/api/albums", albumRoutes);

@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import { useEffect, useState} from 'react'
 import { useAuth } from '@clerk/clerk-react'
 import { axiosInstance } from '@/lib/axios'
 import { Loader } from 'lucide-react'
@@ -12,10 +12,9 @@ const updateApiToken = (token:string | null) =>{
     }
 }
 
-const AuthProvider = () => {
-  return (
-    <div>
-        const {getToken,userId} = useAuth();
+const AuthProvider = ({ children }:{ children: React.ReactNode}) => {
+  
+        const {getToken} = useAuth();
         const[loading,setLoading] = useState(true);
 
 
@@ -41,8 +40,7 @@ const AuthProvider = () => {
 
             </div>
         )
-    </div>
-  )
+  return <>{children}</>
 }
 
 export default AuthProvider
