@@ -27,7 +27,7 @@ const LoginPrompt = () => (
 )
 
 const FriendActivity = () => {
-    const {users, fetchUsers, error, isLoading} = useChatStore();
+    const {users, fetchUsers} = useChatStore();
     const {user} = useUser();
     const isPlaying = false;
     useEffect(() =>{
