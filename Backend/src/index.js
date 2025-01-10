@@ -14,6 +14,7 @@ import statRoutes from "./routes/stat.route.js"
 import path from "path"
 import cors from "cors"
 import { authCallback } from "./controller/auth.controller.js";
+import { getAlbumById, getAllAlbums } from "../src/controller/album.controller.js";
 
 dotenv.config();
 
@@ -39,7 +40,9 @@ app.use("/api/users", userRoutes);
 app.post("/api/auth/callback", authCallback);
 app.use("/api/admin", adminRoutes);
 app.use("/api/songs", songRoutes);
-app.use("/api/albums", albumRoutes);
+// app.use("/api/albums", albumRoutes);
+app.get("/api/albums/", getAllAlbums);
+app.get("/api/albums/:albumId", getAlbumById);
 app.use("/api/stats", statRoutes);
 
 //error handler
