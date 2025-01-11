@@ -15,6 +15,7 @@ import path from "path"
 import cors from "cors"
 import { authCallback } from "./controller/auth.controller.js";
 import { getAlbumById, getAllAlbums } from "../src/controller/album.controller.js";
+import { checkAdmin } from "./controller/admin.controller.js";
 
 dotenv.config();
 
@@ -34,11 +35,13 @@ app.use(fileUpload({
         fileSize: 10 * 1024 * 1024//10mb
     }
 }));
-app.use(cors())
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+
 
 app.use("/api/users", userRoutes);
 app.post("/api/auth/callback", authCallback);
 app.use("/api/admin", adminRoutes);
+app.get("/api/admin/check", checkAdmin)
 app.use("/api/songs", songRoutes);
 // app.use("/api/albums", albumRoutes);
 app.get("/api/albums/", getAllAlbums);
